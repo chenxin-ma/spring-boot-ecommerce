@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  mysql_db_container:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_USER=userx
+      - MYSQL_PASSWORD=1111
+      - MYSQL_DATABASE=db1
+      - MYSQL_ROOT_PASSWORD=1234
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - "./conf.d:/etc/mysql/conf.d:ro" # cannot change to anywhere else
+  adminer_container:
+    image: adminer:latest
+    restart: always
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql_db_container
+    ports:
+      - 9000:8080 #default port for adminer is 8080
+
+volumes:
+  mysql_db_data_container:
