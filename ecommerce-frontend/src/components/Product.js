@@ -21,14 +21,14 @@ export default function Product(props) {
 
   return (
     <Card>
-      <Image src={pic} wrapped ui={false} />
-      <Label color="teal" size="large" attached="top left">
+      {/*<Image src={pic} wrapped ui={false} />*/}
+      <Label color="teal" size="small" attached="top left">
         Comida
       </Label>
       <Card.Content>
         <Card.Header>
-          <Header floated="left">{props.product.name}</Header>
-          <Header floated="right" color="teal">
+          <Header floated="left" size="small">{props.product.name}</Header>
+          <Header floated="right" color="teal" size="small">
             ${props.product.price}
           </Header>
         </Card.Header>

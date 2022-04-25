@@ -68,7 +68,7 @@ public class UserResource {
 	 * @param email the email
 	 * @return all users
 	 */
-	@DeleteMapping(value = "/delete")
+	@DeleteMapping(value = "/delete/{username}")
 	public List<User> delete(@PathVariable String username) {
 		userRepository.deleteById(username);
 		return userRepository.findAll();

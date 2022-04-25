@@ -13,7 +13,7 @@ export default function Products() {
   const { user, products, getProducts } = context;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage, setCardsPerPage] = useState(6);
+  const [cardsPerPage, setCardsPerPage] = useState(500);
 
   useEffect(() => {
     getProducts();
@@ -63,7 +63,7 @@ export default function Products() {
           </Grid.Column>
         </Grid>
       </Segment>
-      <Card.Group fluid itemsPerRow="3">
+      <Card.Group fluid itemsPerRow="10">
         {views}
       </Card.Group>
       <br />
