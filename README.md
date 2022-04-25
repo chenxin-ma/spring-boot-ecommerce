@@ -77,28 +77,29 @@ npm start
 - Create a table by
 ``` SQL 
 CREATE TABLE ecommerce.options (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT(255) PRIMARY KEY,
     symb VARCHAR(255),
-    date DATE,
+    date VARCHAR(255),
     callVol INT(255),
     longCVol INT(255),
     putVol INT(255),
     longPVol INT(255),
-    pcVolR FLOAT(32),
+    pcVolR FLOAT(3),
     ttlVol INT(255),
     callOpen INT(255),
     longCOpen INT(255),
     putOpen INT(255),
     longPOpen INT(255),
-    pcOpenR FLOAT(32),
+    pcOpenR FLOAT(3),
     ttlOpen INT(255),
-    volOverOpen FLOAT(32),
-    volOverShare FLOAT(32),
-    openOverShare FLOAT(32),
-    changePct FLOAT(32),
-    volMulti FLOAT(32)
+    volOverOpen FLOAT(3),
+    volOverShare FLOAT(3),
+    openOverShare FLOAT(3),
+    changePct FLOAT(3),
+    volMulti FLOAT(3)
 );
 ```
+(https://www.w3schools.com/mysql/mysql_datatypes.asp for data types in MySQL)
 - Copy data file into the docker container
 ```bash
 docker cp data/historical_option_daily/all.csv spring-boot-ecommerce-mysql_db_container-1:/data_upload
@@ -112,12 +113,14 @@ sudo docker exec -it spring-boot-ecommerce-mysql_db_container-1 bash
 mysql --local-infile=1 --password
 ```
 ```SQL
-LOAD DATA LOCAL INFILE '/data_upload/all.csv' 
+LOAD DATA LOCAL INFILE '/data_upload/all_.csv' 
 INTO TABLE ecommerce.options 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 1 ROWS;
+IGNORE 1 ROWS
+(id,symb,date,callVol,longCVol,putVol,longPVol,pcVolR,ttlVol,callOpen,longCOpen,putOpen,longPOpen,pcOpenR,
+ttlOpen,volOverOpen,volOverShare,openOverShare,changePct,volMulti);
 ```
 
 
