@@ -71,6 +71,58 @@ cd ecommerce-frontend
 npm start
 ```
 
+
+## Import .csv file into a MySQL table
+- Check  https://stackoverflow.com/questions/59993844/error-loading-local-data-is-disabled-this-must-be-enabled-on-both-the-client
+- Create a table by
+``` SQL 
+CREATE TABLE ecommerce.options (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    symb VARCHAR(255),
+    date DATE,
+    callVol INT(255),
+    longCVol INT(255),
+    putVol INT(255),
+    longPVol INT(255),
+    pcVolR FLOAT(32),
+    ttlVol INT(255),
+    callOpen INT(255),
+    longCOpen INT(255),
+    putOpen INT(255),
+    longPOpen INT(255),
+    pcOpenR FLOAT(32),
+    ttlOpen INT(255),
+    volOverOpen FLOAT(32),
+    volOverShare FLOAT(32),
+    openOverShare FLOAT(32),
+    changePct FLOAT(32),
+    volMulti FLOAT(32)
+);
+```
+- Copy data file into the docker container
+```bash
+docker cp data/historical_option_daily/all.csv spring-boot-ecommerce-mysql_db_container-1:/data_upload
+```
+- Enter command line of docker container
+```bash
+sudo docker exec -it spring-boot-ecommerce-mysql_db_container-1 bash
+```
+- Insert data into mysql table
+```bash
+mysql --local-infile=1 --password
+```
+```SQL
+LOAD DATA LOCAL INFILE '/data_upload/all.csv' 
+INTO TABLE ecommerce.options 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+```
+
+
+
+
 ## Links
 
 This example uses the following open source libraries:
