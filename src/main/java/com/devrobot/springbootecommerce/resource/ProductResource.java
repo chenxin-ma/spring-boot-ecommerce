@@ -48,7 +48,7 @@ public class ProductResource {
 	 * @return product if exists
 	 */
 	@GetMapping(value = "/get")
-	public Product get(@RequestParam("id") int id) {
+	public Product get(@RequestParam("id") long id) {
 		return productRepository.findById(id).get();
 	}
 	/**
@@ -69,7 +69,7 @@ public class ProductResource {
 	 * @return all products
 	 */
 	@DeleteMapping(value = "/delete")
-	public List<Product> delete(@PathVariable int id) {
+	public List<Product> delete(@PathVariable long id) {
 		productRepository.deleteById(id);
 		return productRepository.findAll();
 	}
@@ -81,7 +81,7 @@ public class ProductResource {
 	 * @return all products
 	 */
 	@PutMapping(value = "/put/{id}")
-	public List<Product> put(@PathVariable int id, @RequestBody Product product) {
+	public List<Product> put(@PathVariable long id, @RequestBody Product product) {
 		if (productRepository.existsById(id)) {
 			productRepository.deleteById(id);
 			productRepository.save(product);

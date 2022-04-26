@@ -10,5 +10,5 @@ import com.devrobot.springbootecommerce.model.Product;
  * @author devrobot
  * @version 1.0
  */
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 }
