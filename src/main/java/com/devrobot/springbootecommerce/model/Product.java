@@ -16,41 +16,59 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Product {
 
-	/** The id. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	/** The name. */
-	@Column(name = "name", nullable = false)
-	private String name;
+	@Column(name = "type")
+	private String type;
 
-	/** The description. */
+	@Column(name = "symb", nullable = false)
+	private String symb;
+
 	@Column(name = "description")
 	private String description;
 
-	/** The weight. */
-	@Column(name = "weight")
-	private double weight;
+	@Column(name = "date", nullable = false)
+	private String date;
 
-	/** The price. */
-	@Column(name = "price", nullable = false)
+	@Column(name = "bid")
+	private double bid;
+
+	@Column(name = "ask")
+	private double ask;
+
+	@Column(name = "delta")
+	private double delta;
+
+	@Column(name = "gamma")
+	private double gamma;
+
+	@Column(name = "theta")
+	private double theta;
+
+	@Column(name = "vega")
+	private double vega;
+
+	@Column(name = "rho")
+	private double rho;
+
+
+	@Column(name = "price")
 	private double price;
 
-	/** The pictures. */
-	@Column(name = "picture1")
-	private String picture1;
+	@Column(name = "volume")
+	private int volume;
 
-	/** The pictures. */
-	@Column(name = "picture2")
-	private String picture2;
+	@Column(name = "open")
+	private int open;
 
-	/** The pictures. */
-	@Column(name = "picture3")
-	private String picture3;
+	@Column(name = "strike")
+	private double strike;
 
-	/** The category. */
+	@Column(name = "expiration")
+	private String expiration;
+
 	@ManyToOne
 	private Category category;
 
@@ -64,26 +82,46 @@ public class Product {
 	 * Instantiates a new product.
 	 *
 	 * @param id          the id
-	 * @param name        the name
+	 * @param symb        the symb
 	 * @param description the description
-	 * @param weight      the weight
+	 * @param date		  the date
+	 * @param type        the type
+	 * @param ask	      the ask
+	 * @param bid 		  the bid
 	 * @param price       the price
-	 * @param picture1    the picture 1
-	 * @param picture2    the picture 2
-	 * @param picture3    the picture 3
-	 * @param category    the category
+	 * @param delta       the delta
+	 * @param gamma       the gamma
+	 * @param theta       the theta
+	 * @param vega        the vega
+	 * @param rho         the rho
+	 * @param volume       the volume
+	 * @param open        the open
+	 * @param strike      the strike
+	 * @param expiration  the expiration
 	 */
-	public Product(Integer id, String name, String description, double weight, double price, String picture1,
-			String picture2, String picture3, Category category) {
+	public Product(Long id,  String type, String symb, String description, String date,
+				   double bid, double ask, double price,
+				   double delta, double gamma, double theta, double vega, double rho,
+				   int volume, int open, double strike,
+				   String expiration, Category category) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.symb = symb;
+		this.type = type;
 		this.description = description;
-		this.weight = weight;
+		this.date = date;
+		this.bid = bid;
+		this.ask = ask;
+		this.delta = delta;
+		this.gamma = gamma;
+		this.theta = theta;
+		this.vega = vega;
+		this.rho = rho;
 		this.price = price;
-		this.picture1 = picture1;
-		this.picture2 = picture2;
-		this.picture3 = picture3;
+		this.volume = volume;
+		this.open = open;
+		this.strike = strike;
+		this.expiration = expiration;
 		this.category = category;
 	}
 
@@ -92,7 +130,7 @@ public class Product {
 	 *
 	 * @return the id
 	 */
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -101,7 +139,7 @@ public class Product {
 	 *
 	 * @param id the new id
 	 */
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -110,17 +148,17 @@ public class Product {
 	 *
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
+	public String getSymb() {
+		return symb;
 	}
 
 	/**
 	 * Sets the name.
 	 *
-	 * @param name the new name
+	 * @param symb the new name
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setSymb(String symb) {
+		this.symb = symb;
 	}
 
 	/**
@@ -141,74 +179,34 @@ public class Product {
 		this.description = description;
 	}
 
-	/**
-	 * Gets the picture 1.
-	 *
-	 * @return the picture 1
-	 */
-	public String getPicture1() {
-		return picture1;
+	public String getDate() {
+		return date;
 	}
 
-	/**
-	 * Sets the picture 1.
-	 *
-	 * @param picture1 the new picture 1
-	 */
-	public void setPicture1(String picture1) {
-		this.picture1 = picture1;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
-	/**
-	 * Gets the picture 2.
-	 *
-	 * @return the picture 2
-	 */
-	public String getPicture2() {
-		return picture2;
+	public double getAsk() {
+		return ask;
 	}
 
-	/**
-	 * Sets the picture 2.
-	 *
-	 * @param picture2 the new picture 2
-	 */
-	public void setPicture2(String picture2) {
-		this.picture2 = picture2;
+	public void setAsk(double ask) {
+		this.ask = ask;
 	}
 
-	/**
-	 * Gets the picture 3.
-	 *
-	 * @return the picture 3
-	 */
-	public String getPicture3() {
-		return picture3;
+	public double getBid() {
+		return bid;
 	}
 
-	/**
-	 * Sets the picture 3.
-	 *
-	 * @param picture3 the new picture 3
-	 */
-	public void setPicture3(String picture3) {
-		this.picture3 = picture3;
+	public void setBid(double bid) {
+		this.bid = bid;
 	}
 
-	/**
-	 * Gets the price.
-	 *
-	 * @return the price
-	 */
 	public double getPrice() {
 		return price;
 	}
 
-	/**
-	 * Sets the price.
-	 *
-	 * @param price the new price
-	 */
 	public void setPrice(double price) {
 		this.price = price;
 	}
@@ -231,21 +229,80 @@ public class Product {
 		this.category = category;
 	}
 
-	/**
-	 * Gets the weight.
-	 *
-	 * @return the weight
-	 */
-	public double getWeight() {
-		return weight;
+	public double getDelta() {
+		return delta;
 	}
 
-	/**
-	 * Sets the weight.
-	 *
-	 * @param weight the new weight
-	 */
-	public void setWeight(double weight) {
-		this.weight = weight;
+	public void setDelta(double delta) {
+		this.delta = delta;
+	}
+
+	public double getGamma() {
+		return gamma;
+	}
+
+	public void setGamma(double gamma) {
+		this.gamma = gamma;
+	}
+
+	public double getTheta() {
+		return theta;
+	}
+
+	public void setTheta(double theta) {
+		this.theta = theta;
+	}
+
+	public double getVega() {
+		return vega;
+	}
+
+	public void setVega(double vega) {
+		this.vega = vega;
+	}
+
+	public double getRho() {
+		return rho;
+	}
+
+	public void setRho(double rho) {
+		this.rho = rho;
+	}
+
+	public double getStrike() {
+		return strike;
+	}
+
+	public void setStrike(double strike) {
+		this.strike = strike;
+	}
+
+	public int getVolume() {
+		return volume;
+	}
+	public void setVolume(int volume) {
+		this.volume = volume;
+	}
+
+	public int getOpen() {
+		return open;
+	}
+	public void setOpen(int open) {
+		this.open = open;
+	}
+
+	public String getExpiration() {
+		return expiration;
+	}
+	public void setExpiration(String expiration) {
+		this.expiration = expiration;
+	}
+
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 }
+
